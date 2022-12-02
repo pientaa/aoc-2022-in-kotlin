@@ -1,6 +1,7 @@
 package day01
 
 import readInput
+import splitWhen
 
 fun main() {
     fun part1(input: List<String>): Int =
@@ -23,13 +24,3 @@ fun main() {
     println(part1(input))
     println(part2(input))
 }
-
-inline fun List<String>.splitWhen(predicate: (String) -> Boolean): List<List<String>> =
-    foldIndexed(mutableListOf<MutableList<String>>()) { index, acc, s ->
-        when {
-            predicate(s) -> if (index < size - 1) acc.add(mutableListOf())
-            acc.isNotEmpty() -> acc.last().add(s)
-            else -> acc.add(mutableListOf(s))
-        }
-        acc
-    }
