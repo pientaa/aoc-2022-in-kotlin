@@ -4,30 +4,34 @@ import readInput
 
 fun main() {
     fun part1(input: List<String>): Int {
+        fun Char.shapeScore() = this - 'X' + 1
+
+        fun outcome(round: String): Int =
+            when (round) {
+                "C X", "A Y", "B Z" -> 6
+                "A X", "B Y", "C Z" -> 3
+                "B X", "C Y", "A Z" -> 0
+                else -> throw Exception()
+            }
 
         return input.sumOf {
-            scores1.getValue(it)
+            outcome(it) + it[2].shapeScore()
         }
     }
 
     fun part2(input: List<String>): Int {
+        fun Char.outcome() = (this - 'X') * 3
 
-        val scores2 = mutableMapOf(
-            "A X" to "A Z",
-            "A Y" to "A X",
-            "A Z" to "A Y",
-            "B X" to "B X",
-            "B Y" to "B Y",
-            "B Z" to "B Z",
-            "C X" to "C Y",
-            "C Y" to "C Z",
-            "C Z" to "C X"
-        )
+        fun shapeScore(round: String): Int =
+            when (round) {
+                "B X", "A Y", "C Z" -> 1
+                "C X", "B Y", "A Z" -> 2
+                "A X", "C Y", "B Z" -> 3
+                else -> throw Exception()
+            }
 
         return input.sumOf {
-            scores1.getValue(
-                scores2.getValue(it)
-            )
+            it[2].outcome() + shapeScore(it)
         }
     }
 
@@ -38,16 +42,4 @@ fun main() {
     println(part1(input))
     println(part2(input))
 }
-
-val scores1 = mutableMapOf(
-    "A X" to 4,
-    "A Y" to 8,
-    "A Z" to 3,
-    "B X" to 1,
-    "B Y" to 5,
-    "B Z" to 9,
-    "C X" to 7,
-    "C Y" to 2,
-    "C Z" to 6
-)
 
