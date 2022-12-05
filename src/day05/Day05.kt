@@ -20,37 +20,38 @@ fun main() {
             }.toMutableList()
 
     fun transformCommands(rawCommands: List<String>) =
-        rawCommands.map {
-            val (howMany, from, to) = it.replace(regex = Regex("[A-Za-z]"), "").trim()
+        rawCommands.map { rawCommand ->
+            val (howMany, from, to) = rawCommand.replace(regex = Regex("[A-Za-z]"), "").trim()
                 .split("  ")
                 .map { it.toInt() }
             Triple(howMany, from, to)
         }
 
-    fun part1(input: String): String {
+    fun transformInput(input: String): Pair<MutableList<MutableList<Char>>, List<Triple<Int, Int, Int>>> {
         val (rawStacks: List<String>, rawCommands: List<String>) = input.split("\n\n").map { it.split("\n") }
-        val stacks = transformStacks(rawStacks)
-        val commands = transformCommands(rawCommands)
+        return Pair(transformStacks(rawStacks), transformCommands(rawCommands))
+    }
+
+    fun part1(input: String): String {
+        val (stacks, commands) = transformInput(input)
 
         commands.forEach { (howMany, from, to) ->
             stacks
                 .transform(howMany, from, to)
         }
 
-        return stacks.fold("") { acc, chars -> acc + if (chars.isNotEmpty()) chars.last() else "" }
+        return stacks.getLastCrates()
     }
 
     fun part2(input: String): String {
-        val (rawStacks: List<String>, rawCommands: List<String>) = input.split("\n\n").map { it.split("\n") }
-        val stacks = transformStacks(rawStacks)
-        val commands = transformCommands(rawCommands)
+        val (stacks, commands) = transformInput(input)
 
         commands.forEach { (howMany, from, to) ->
             stacks
                 .transform(howMany, from, to, reversed = false)
         }
 
-        return stacks.fold("") { acc, chars -> acc + if (chars.isNotEmpty()) chars.last() else "" }
+        return stacks.getLastCrates()
     }
 
     // test if implementation meets criteria from the description, like:
@@ -60,6 +61,9 @@ fun main() {
     println(part1(input))
     println(part2(input))
 }
+
+private fun <E> MutableList<MutableList<E>>.getLastCrates(): String =
+    fold("") { acc, chars -> acc + if (chars.isNotEmpty()) chars.last() else "" }
 
 private fun <E> MutableList<MutableList<E>>.transform(
     howMany: Int,
