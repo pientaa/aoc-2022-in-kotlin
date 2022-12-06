@@ -8,7 +8,7 @@ fun main() {
         return input.windowedSequence(4, 1)
             .withIndex()
             .first {
-                it.value.groupBy { it }.keys.size == 4
+                it.value.toSet().size == 4
             }
             .let { it.index + 4 }
     }
@@ -17,7 +17,7 @@ fun main() {
         return input.windowedSequence(14, 1)
             .withIndex()
             .first {
-                it.value.groupBy { it }.keys.size == 14
+                it.value.toSet().size == 14
             }
             .let { it.index + 14 }
     }
