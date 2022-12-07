@@ -8,7 +8,6 @@ fun main() {
         val fileSystem = Directory("/")
         val currentPath: MutableList<String> = mutableListOf()
 
-
         input.drop(1).map {
             when {
                 it.contains("dir") -> {
@@ -27,10 +26,6 @@ fun main() {
                 it.contains("cd") && !it.contains("..") -> {
                     val directoryName = it.substring(5)
                     currentPath.add(directoryName)
-                }
-
-                it.contains("ls") -> {
-                    //ignore
                 }
 
                 else -> {}
@@ -74,7 +69,7 @@ fun main() {
 class Directory(private val name: String) {
     private val directories: MutableList<Directory> = mutableListOf()
     private val files: MutableList<File> = mutableListOf()
-    var size: Int = 0
+    private var size: Int = 0
 
     fun addDirectory(directoryName: String, path: List<String>) {
         val nestedDirectory = getDirectoryAtPath(path)
