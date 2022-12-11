@@ -65,21 +65,21 @@ data class Knot(
     }
 
     fun move(direction: Direction) {
-        if (following == null) {
-            position.move(direction)
-            visited.add(position.copy())
-            return
+        when (following) {
+            null -> position.move(direction)
+            else -> {
+                val distance = position distanceTo following.position
+                val directions = distance.getDirections()
+
+                if (distance isFurtherThanMoves 2 || distance isExactlyFarInOneAxis 2)
+                    directions.forEach { position.move(it) }
+            }
         }
-
-        val distance = position distanceTo following.position
-        val directions = listOfNotNull(distance.first.getDirection(Axis.X), distance.second.getDirection(Axis.Y))
-
-        if (distance isFurtherThanMoves 2 || distance isExactlyFarInOneAxis 2)
-            directions.forEach { position.move(it) }
-
         visited.add(position.copy())
     }
 }
+
+private fun Pair<Int, Int>.getDirections() = listOfNotNull(first.getDirection(Axis.X), second.getDirection(Axis.Y))
 
 private infix fun Pair<Int, Int>.isFurtherThanMoves(overallDistance: Int): Boolean =
     (abs(first) + abs(second)) > overallDistance
