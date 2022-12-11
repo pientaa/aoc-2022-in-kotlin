@@ -74,11 +74,9 @@ data class Knot(
         val distance = position distanceTo following.position
         val directions = listOfNotNull(distance.first.getDirection(Axis.X), distance.second.getDirection(Axis.Y))
 
-        when {
-            distance isFurtherThanMoves 2 || distance isExactlyFarInOneAxis 2 -> {
-                directions.forEach { position.move(it) }
-            }
-        }
+        if (distance isFurtherThanMoves 2 || distance isExactlyFarInOneAxis 2)
+            directions.forEach { position.move(it) }
+
         visited.add(position.copy())
     }
 }
