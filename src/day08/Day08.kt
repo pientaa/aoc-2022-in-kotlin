@@ -1,6 +1,6 @@
 package day08
 
-import readInput
+import readLines
 
 fun main() {
 
@@ -52,9 +52,9 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("day08/Day08_test")
+    val testInput = readLines("day08/Day08_test")
 
-    val input = readInput("day08/Day08")
+    val input = readLines("day08/Day08")
     println(part1(input))
     println(part2(input))
 }

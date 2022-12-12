@@ -1,6 +1,6 @@
 package day03
 
-import readInput
+import readLines
 
 fun main() {
 
@@ -33,9 +33,9 @@ fun main() {
             .sumOf { findBadge(it).toPriority() }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("day03/Day03_test")
+    val testInput = readLines("day03/Day03_test")
 
-    val input = readInput("day03/Day03")
+    val input = readLines("day03/Day03")
     println(part1(input))
     println(part2(input))
 }

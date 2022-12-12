@@ -1,6 +1,6 @@
 package day01
 
-import readInput
+import readLines
 import splitWhen
 
 fun main() {
@@ -18,9 +18,9 @@ fun main() {
             .sum()
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("day01/Day01_test")
+    val testInput = readLines("day01/Day01_test")
 
-    val input = readInput("day01/Day01")
+    val input = readLines("day01/Day01")
     println(part1(input))
     println(part2(input))
 }

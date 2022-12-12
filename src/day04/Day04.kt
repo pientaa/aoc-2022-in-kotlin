@@ -1,6 +1,6 @@
 package day04
 
-import readInput
+import readLines
 
 fun main() {
 
@@ -32,9 +32,9 @@ fun main() {
             .size
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("day04/Day04_test")
+    val testInput = readLines("day04/Day04_test")
 
-    val input = readInput("day04/Day04")
+    val input = readLines("day04/Day04")
     println(part1(input))
     println(part2(input))
 }

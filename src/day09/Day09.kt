@@ -4,7 +4,7 @@ import day09.Direction.DOWN
 import day09.Direction.LEFT
 import day09.Direction.RIGHT
 import day09.Direction.UP
-import readInput
+import readLines
 import kotlin.math.abs
 
 fun main() {
@@ -43,9 +43,9 @@ fun main() {
     }
 
     // test if implementation meets criteria from the description, like:
-    val testInput = readInput("day09/Day09_test")
+    val testInput = readLines("day09/Day09_test")
 
-    val input = readInput("day09/Day09")
+    val input = readLines("day09/Day09")
     println(part1(input))
     println(part2(input))
 }
